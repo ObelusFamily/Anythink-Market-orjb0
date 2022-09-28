@@ -19,6 +19,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ItemPreview = (props) => {
   const item = props.item;
+  const defaultImg = process.env.PUBLIC_URL + "/placeholder.png";
+
+  const replaceImg = (err) => {
+    err.target.src = defaultImg;
+  };
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -39,6 +44,7 @@ const ItemPreview = (props) => {
         src={item.image}
         className="card-img-top item-img"
         style={{ borderRadius: "20px" }}
+        onError={replaceImg}
       />
       <div className="card-body">
         <Link to={`/item/${item.slug}`} className="text-white">
