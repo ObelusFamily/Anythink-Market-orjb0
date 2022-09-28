@@ -40,7 +40,11 @@ const ItemPreview = (props) => {
     >
       <img
         alt="item"
-        src={typeof item.image === "string" ? item.image : ""}
+        src={
+          typeof item.image === "string" && item.image !== ""
+            ? item.image
+            : "/placeholder.png"
+        }
         className="card-img-top item-img"
         style={{ borderRadius: "20px" }}
         onError={replaceImg}
