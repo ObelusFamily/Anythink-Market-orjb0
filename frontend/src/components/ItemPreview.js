@@ -29,6 +29,10 @@ const ItemPreview = (props) => {
     }
   };
 
+  const replaceImg = (err) => {
+    err.target.src = "placeholder.png";
+  };
+
   return (
     <div
       className="card bg-dark border-light p-3"
@@ -39,6 +43,7 @@ const ItemPreview = (props) => {
         src={item.image}
         className="card-img-top item-img"
         style={{ borderRadius: "20px" }}
+        onError={replaceImg}
       />
       <div className="card-body">
         <Link to={`/item/${item.slug}`} className="text-white">
