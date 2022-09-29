@@ -3,12 +3,11 @@ import agent from "../../agent";
 import logo from "../../imgs/logo.png";
 
 const Banner = (props) => {
-
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
-    if (title.length >= 3 || title === '') {
-      handleChange()
+    if (title.length >= 3 || title === "") {
+      handleChange();
     }
   });
 
@@ -18,11 +17,11 @@ const Banner = (props) => {
       (page) => agent.Items.byTitle(title, page),
       agent.Items.byTitle(title)
     );
-  }
+  };
 
   const onChangeHandle = (ev) => {
     setTitle(ev.target.value);
-  }
+  };
 
   return (
     <div className="banner text-white">
@@ -34,26 +33,32 @@ const Banner = (props) => {
           </div>
           <div className="col-5">
             <div className="input-group">
-              <input style={{
-                "outline": "0 !important",
-                "borderColor": "initial",
-                "boxShadow": "none"
-              }} 
-              id="search-box" 
-              className="form-control form-control-lg py-2 border-right-0 border" 
-              type="search" 
-              placeholder="What is it that you truly desire?" 
-              onChange={(ev) => {onChangeHandle(ev)}}
-              value={title}
+              <input
+                style={{
+                  outline: "0 !important",
+                  borderColor: "initial",
+                  boxShadow: "none",
+                }}
+                id="search-box"
+                className="form-control form-control-lg py-2 border-right-0 border"
+                type="search"
+                placeholder="What is it that you truly desire?"
+                onChange={(ev) => {
+                  onChangeHandle(ev);
+                }}
+                value={title}
               />
-                <span className="input-group-append">
-                  <i className="bi bi-search form-control form-control-lg py-2 border-left-0" style={{
-                    "borderTopLeftRadius": "0",
-                    "borderBottomLeftRadius": "0",
-                    "color": "#8671c7",
-                    "fontWeight": "bold"
-                  }}></i>
-                </span>
+              <span className="input-group-append">
+                <i
+                  className="bi bi-search form-control form-control-lg py-2 border-left-0"
+                  style={{
+                    borderTopLeftRadius: "0",
+                    borderBottomLeftRadius: "0",
+                    color: "#8671c7",
+                    fontWeight: "bold",
+                  }}
+                ></i>
+              </span>
             </div>
           </div>
           <div className="col p-0 d-flex flex-row align-items-center">
