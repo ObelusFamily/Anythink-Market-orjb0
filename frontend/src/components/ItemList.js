@@ -8,7 +8,7 @@ const ItemList = (props) => {
   }
 
   if (props.items.length === 0) {
-    if (props.title && props.title.length >= 3) {
+    if (props.title) {
       return (
         <div className="py-4 no-items text-center d-flex justify-content-center align-items-center">
           <div className="py-4 px-5" style={{ background: "#662D84" }}>
