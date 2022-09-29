@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import agent from "../../agent";
 import logo from "../../imgs/logo.png";
 
-const Banner = () => {
+const Banner = (props) => {
+
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    if (title.length >= 3 || title === '') {
+      handleChange()
+    }
+  });
+
+  const handleChange = () => {
+    props.onSearchTitle(
+      title,
+      (page) => agent.Items.byTitle(title, page),
+      agent.Items.byTitle(title)
+    );
+  }
+
+  const onChangeHandle = (ev) => {
+    setTitle(ev.target.value);
+  }
+
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">
@@ -14,13 +36,20 @@ const Banner = () => {
             <div className="input-group">
               <input style={{
                 "outline": "0 !important",
-                "border-color": "initial",
-                "box-shadow": "none"
-              }} id="search-box" className="form-control form-control-lg py-2 border-right-0 border" type="search" placeholder="What is it that you truly desire?" />
-                <span class="input-group-append">
+                "borderColor": "initial",
+                "boxShadow": "none"
+              }} 
+              id="search-box" 
+              className="form-control form-control-lg py-2 border-right-0 border" 
+              type="search" 
+              placeholder="What is it that you truly desire?" 
+              onChange={(ev) => {onChangeHandle(ev)}}
+              value={title}
+              />
+                <span className="input-group-append">
                   <i className="bi bi-search form-control form-control-lg py-2 border-left-0" style={{
-                    "border-top-left-radius": "0",
-                    "border-bottom-left-radius": "0",
+                    "borderTopLeftRadius": "0",
+                    "borderBottomLeftRadius": "0",
                     "color": "#8671c7",
                     "fontWeight": "bold"
                   }}></i>
