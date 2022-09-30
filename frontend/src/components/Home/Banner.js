@@ -66,9 +66,10 @@ const Banner = (props) => {
         <img src={logo} alt="banner" />
         <div className="row">
           <div className="col p-0 d-flex flex-row-reverse align-items-center">
-            <span id="get-part">
+            <span>
               A place to{" "}
               <span
+                id="get-part"
                 className="user-select-none"
                 onClick={() => {
                   setToggleSearch(true);
