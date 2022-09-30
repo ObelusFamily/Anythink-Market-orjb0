@@ -8,6 +8,23 @@ const ItemList = (props) => {
   }
 
   if (props.items.length === 0) {
+    if (props.title) {
+      return (
+        <div
+          id="empty"
+          className="py-4 no-items text-center d-flex justify-content-center align-items-center"
+        >
+          <div className="py-4 px-5" style={{ background: "#662D84" }}>
+            <h1>
+              <i className="bi bi-emoji-frown-fill"></i>
+            </h1>
+            No items found for &ldquo;
+            <span style={{ fontWeight: "bold" }}>{props.title}</span>&rdquo;.
+          </div>
+        </div>
+      );
+    }
+
     return <div className="py-4 no-items">No items are here... yet.</div>;
   }
 

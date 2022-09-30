@@ -45,6 +45,7 @@ const reducer = (state = {}, action) => {
         itemsCount: action.payload.itemsCount,
         tab: null,
         tag: action.tag,
+        title: null,
         currentPage: 0,
       };
     case APPLY_TITLE_FILTER:
@@ -78,6 +79,7 @@ const reducer = (state = {}, action) => {
         tab: action.tab,
         currentPage: 0,
         tag: null,
+        title: null,
       };
     case PROFILE_PAGE_LOADED:
     case PROFILE_FAVORITES_PAGE_LOADED:
