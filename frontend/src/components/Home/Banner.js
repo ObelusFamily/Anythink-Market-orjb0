@@ -3,28 +3,29 @@ import agent from "../../agent";
 import logo from "../../imgs/logo.png";
 
 const Banner = (props) => {
-  const [title, setTitle] = useState("");
   const [toggleSearch, setToggleSearch] = useState(false);
 
-  useEffect(() => {
-    if (title.length >= 3 || title === "") {
-      handleChange();
-    }
-  });
+  const SearchBar = (props) => {
+    const [title, setTitle] = useState("");
 
-  const handleChange = () => {
-    props.onSearchTitle(
-      title,
-      (page) => agent.Items.byTitle(title, page),
-      agent.Items.byTitle(title)
-    );
-  };
+    useEffect(() => {
+      if (title.length >= 3 || title === "") {
+        handleChange();
+      }
+    });
 
-  const onChangeHandle = (ev) => {
-    setTitle(ev.target.value);
-  };
+    const handleChange = () => {
+      props.onSearchTitle(
+        title,
+        (page) => agent.Items.byTitle(title, page),
+        agent.Items.byTitle(title)
+      );
+    };
 
-  const SearchBar = () => {
+    const onChangeHandle = (ev) => {
+      setTitle(ev.target.value);
+    };
+
     return (
       <div className="col-5">
         <div className="input-group">
@@ -70,14 +71,18 @@ const Banner = (props) => {
               <span
                 className="user-select-none"
                 onClick={() => {
-                  setToggleSearch(!toggleSearch);
+                  setToggleSearch(true);
                 }}
               >
                 get
               </span>
             </span>
           </div>
-          {toggleSearch ? <SearchBar /> : <span>&nbsp;</span>}
+          {toggleSearch ? (
+            <SearchBar onSearchTitle={props.onSearchTitle} />
+          ) : (
+            <span>&nbsp;</span>
+          )}
           <div className="col p-0 d-flex flex-row align-items-center">
             <span>the cool stuff.</span>
           </div>
