@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI);
+var db = mongoose.connect(process.env.MONGODB_URI);
 
 require("../models/User");
 require("../models/Item");
@@ -10,6 +10,8 @@ var Item = mongoose.model("Item");
 var Comment = mongoose.model("Comment");
 
 const { faker } = require("@faker-js/faker");
+
+var createdComments = [];
 
 const seedData = () => {
   const user = new User();
@@ -36,7 +38,7 @@ const seedData = () => {
       var item = new Item(fakeItem);
       item.seller = user;
 
-      item
+      return item
         .save()
         .then(() => {
           const fakeComment = {
@@ -47,12 +49,16 @@ const seedData = () => {
           comment.item = item;
           comment.seller = user;
 
-          comment.save().then(() => {
+          return comment.save().then(() => {
             item.comments = item.comments.concat([comment]);
             item
               .save()
               .then(() => {
                 console.log("Data has been added");
+                createdComments.push(comment);
+                if (createdComments.length === 100) {
+                  process.exit(0);
+                }
               })
               .catch((e) => {
                 console.log(e);
@@ -69,6 +75,10 @@ const seedData = () => {
     });
 };
 
-for (let i = 0; i < 100; i++) {
-  seedData();
-}
+const loopSeed = () => {
+  for (let i = 0; i < 100; i++) {
+    seedData();
+  }
+};
+
+loopSeed();
